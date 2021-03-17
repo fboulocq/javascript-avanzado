@@ -1,0 +1,714 @@
+CLASE 01:
+
+De interés:
+https://docs.emmet.io/cheat-sheet/
+https://threejs.org/
+https://developer.mozilla.org/en-US/docs/Web/API
+https://github.com/webpwnized/mutillidae#:~:text=Fork%20105-,OWASP%20Mutillidae%20II%20is%20a%20free%2C%20open%20source%2C%20deliberately%20vulnerable,on%20SamuraiWTF%20and%20OWASP%20BWA.
+http://vanilla-js.com/
+https://caniuse.com/
+https://material.io/resources/icons/?style=baseline
+https://materialdesignthemes.com/
+https://www.muicss.com/
+https://getmdl.io/components/index.html
+http://flexboxgrid.com/
+http://latentflip.com/loupe/
+https://javascript.info/
+https://exploringjs.com/es2018-es2019/
+https://regexr.com/
+https://developer.mozilla.org/es/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
+https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType
+https://nominatim.org/release-docs/develop/api/Overview/
+https://pokeapi.co/
+https://anapioficeandfire.com/
+https://github.com/public-apis/public-apis
+https://tympanus.net/codrops/category/playground/ - MARY LOU BUENA MAQUETADORA
+https://tympanus.net/Development/CreativeLoadingEffects/ - LOADERS EN CODROPS
+https://tympanus.net/codrops/2016/04/13/interactive-3d-mall-map/ - UN SHOPPING EN 3D CON JS
+https://animejs.com/
+https://www.buenosaires.gob.ar/desarrollourbano/transporte/apitransporte/api-doc - API DE GBA transporte
+https://api.imgur.com/ - para subir imágenes de forma gratuita y te da la url
+
+
+
+DANIEL SANCHEZ - PARA MAQUETADO
+
+--NO CHEQUEAR COSAS EN W3SCHOOL
+--CHEQUEAR EN MDN DE FIREFOX
+
+--TÉNICA PARA CENTRAR CUALQUIER ELEMENTO:
+LEFT: 50%;
+TOP: 50%;
+TRANSFORM: TRANSLATE(-50%, -50%);
+
+----------
+
+----------
+
+Tipos de datos:
+
+PRIMITIVOS: SE PASAN POR VALOR (debo cambiar en cada uno el valor)
+    -String: "", '', ´´
+    -Number: 1, 1.1, -4
+    -Boolean:
+        -{True|!False} {False|null|undefined|""|0|NaN}
+    -null: asignación
+    -undefined: lectura
+    -Symbol: propiedades para un objeto y que no muten (no lo vamos a usar)
+
+OBJETOS: SE PASAN REFERENCIA (si cambio uno se cambio en todos lados el objeto)
+    son unidaddes que pueden tener propiedades y a ellas asignarles valores
+    -Object: { nombre: "Federico", edad: 27 }
+    -Array: ["Federico", 30]
+    -Function: 
+        -function foo(){}
+
+WEB APIS: programas que se crean en el navegador. Javascript puede usarlas
+    Ejemplo: https://developer.mozilla.org/es/docs/Web/API
+    -DOM (Document object model)
+    -BOM (Browser object model)
+    -Event
+    -Ajax
+
+Tipos de Variables: | no es recomendable usar el ámbito Global de variables
+    -var (global)
+    -let (local)
+    -const (local)
+        -no se le puede cambiar el valor
+
+    Regla: (para proteger las variables)
+        1-Si podes usar cons mejor
+        2-Sino podes usar const usar let. 
+        3-NO usar var
+
+
+Windows - El objeto global windows es una representación del navegador - BOM - Browser objet Model
+    -Las varibles con VAR me sobrecargan windows
+        -Ejemplo:
+        var r = true
+        Estoy diciendo:
+        windows.r
+
+    windows.innerWitdth = number (el ancho interno del navegador)
+    windows.innerHeight = number (el alto interno del navegador)
+    windows.outerHeight = number (el alto del navegador)
+    windows.outerWitdth = number (el ancho del navegador)
+
+    Screen = screen
+    windows.screen.width = number (el ancho del hardware)
+    windows.screen.height = number (el alto del hardware)
+
+    Location = location
+    windows.location.href = string  (consultamos y reedirigimos al usuario)
+
+    History = history (sirve para manejar tu historial como manejar tus "pasos")
+    windows.history.back() = nos devuelve para atrás en el historial
+    windows.history.forward() nos mueve para adealatne en el historial
+
+    Document = document - DOM (Document object Model) funciones que vamos a usar para interactuar con el DOM
+    -windows.document - o solo document
+
+Agarrar nodos (etiquetas de html)
+    
+    obtengo el id del elemento y puedo acceder a sus atributos
+        let parrafo_uno = document.getElementById("parrafo-1")
+        parrafo_uno.innerText="Nuevo párrafo uno"
+
+    obtengo todos los tags en un array
+        let parrafo_uno = document.getElementsByTagName("p")
+        parrafo_uno[0].innerText="nuevo parrafo con tagname"
+
+    obtengo todas las clases en un array
+        let parrafo_uno = document.getElementsByClassName("parrafo")
+        parrafo_uno[0].innerText="holaaaaaa"
+    
+    puedo escribir cualquier selector de CSS
+        let parrafo_uno = document.querySelector("#parrafo-1")
+        parrafo_uno.innerText="holaaaa2"
+
+    console.log(parrafo_uno.id)
+    console.dir(parrafo_uno)
+
+    Creación de Nodos - Funciones para crear nodos
+        -Creo mi nodo
+        -obtengo mi elemento
+        -agrego mi nuevo elemento
+
+
+---------------------------------------------------------------------------
+
+CLASE 02:
+
+EVENTOS:
+https://developer.mozilla.org/en-US/docs/Web/Events
+
+
+-Si vamos con F12 --> a Perfomance y le damos Play, recargamos un lugar
+en específico y después Stop. Vemos cómo es la performance de la web con
+el código que tenés puesto.
+    
+    -Rendering: cuánto tiempo tarda el navegador tarda en calcular todas las etiquetas.
+    
+    -Painting: cuando terminó de hacer rendering y te mide cuanto tarda el motor de css,
+    cuánto tarda en ponerle todo el estilo con css.
+    
+    -Cuando modificamos un elemento que ya existe en el DOM, se tiene que
+    activar nuevamente el Rendering y el Painting.
+
+-Un fragmento es como una etiqueta pero en sí no la es. Tiene funciones
+de una etiqueta, de un nodo. Sirven para crear estructuras dentro de esta
+etiqueta "que no existe" y después las volcamos en el DOM.
+    -Es recomendable si queremos hacer un cambio, para aumentar la perfomance,
+    hacer un queryselector a un elemento, crear un fragmento y volcar el elemento
+    ahí y trabajar sobre este "espacio" para luego volcarlo en el DOM
+
+-Console.dir sirve para ver lo que le pases a forma
+de objeto.
+
+-Pensar en las funciones como variables
+
+Eventos: 
+un evento es la ejecución de una función(callback)
+como respuesta a una acción(usuario).
+Se le dice callback, es una función que se ejecuta después
+de que pasa algo.
+Siempre hay dos tiempos: después de y antes de - que eso pases
+    -después de: callbacks
+    -el antes de: es middleware
+
+Forma: (lo que está entre [] es opcional)
+Nodo.AddEventListener(event String, callback Function [ tipo de Evento])
+
+-----------
+NO Hacer eventos a través de HTML como: 
+<button onclick="console.log('hola')">Click</button>
+
+REALIZARLO COMO:
+let button = document.getElementById('boton')
+button.addEventListener('click', () => {
+    console.log("Nuevo evento de click!")
+})
+----------
+
+-En el navegador en "Elements" seleccionando mi botón
+puedo ir del lado derecho a "Event Listeners" y puedo
+ver qué eventos tiene ese botón.
+-La propagación de los eventos es de dentro para afuera. del botón va y se fija su padre
+y así par arriba.
+-Puedo evitar la propagación no más allá de lo indicado.
+    e.stopPropagation()
+por si tengo varios botones en el mismo body. Para que no esté chequeando
+innecesariamente otros botones si sólo quiero que se ejecute ese solo.
+Es considerado de buena práctica evitar que se propague.
+
+-Si presionamos un link y deseamos arrojarle una confirmación,
+podemos hacerlo. Por ejemplo un evento predefinido con un elemento
+a y arrojar la arlerta.
+    -Con la función: preventDefault() prevengo el comportamiento
+    por defecto de cualquier elemento.
+
+-Todos los eventos vienen con la propiedad target, que es
+el elemento que está disparando el evento.
+
+Evento del BOM - puedo chequear el responsive
+window.addEventListener("resize", ()=>{
+    console.log("cambio de tamaño")
+    console.log(`${outerWidth}px X ${outerWidth}px`)
+})
+
+-El evento load para cuando cargue todo el body
+
+-En un forumulario nunca se le agarra al botón y se le pone click
+IMPORTANTE PONERLE EL ID A LOS INPUTS
+
+1-Regla no poner nada en window
+2-Siempre que puedan elementos sin hacer queryselector o getElementById llegando
+de alguna forma, hacerlo.
+Es decir agarrar los elementos del DOM sin hacer queryselector o getElementById o getElementsByTagName estructuras
+
+
+
+
+---------------------------------------------------------------------------
+
+CLASE 03
+
+-Si yo le pongo Required a mis inputs y voy a la pestaña
+de "Elements" en el navegador y le saco el required, puedo
+obivar esos campos.
+
+-Sin hacer un queryselector al body puedo hacer:
+    -document.body
+
+-innerHTML me pertite dos cosas: poner texto plano
+y escribirle dentro un hr.
+No es recomendable para evitar inyección de Scripting
+
+-XSS: Cross-Stite Scripting es un ataque que consiste
+en lo siguiente: vos dejás una porción de tu html o Javascript
+abierto al usuario. No te diste cuenta y el usuario te está
+ingresando código malicioso.
+Puedo inyectar Javascript dentro del Javascript.
+
+-Otros ejemplos: agarras las cookies del servidor y mandarmelas
+a mi servidor.
+
+-OWASP: es una organización que recopila los ataques
+conocidos de hackeos y cómo lo podemos evitar.
+https://github.com/webpwnized/mutillidae#:~:text=Fork%20105-,OWASP%20Mutillidae%20II%20is%20a%20free%2C%20open%20source%2C%20deliberately%20vulnerable,on%20SamuraiWTF%20and%20OWASP%20BWA.
+
+-form.reset() - Se limpia todo el contenido
+del formulario.
+-Otra forma sería igualar el form.nombre.value = ""
+    -es decir igualarlo a vacío, si son pocos input está bien, pero si son
+    muchos es más conveniente el reset() del form.
+
+-función focus() para darle foco a una etiqueta
+en particular.
+
+Validaciones con Javascript en formularios:
+
+Eventos:
+    -click
+    -submit
+    -focus
+    -change
+    -blur - cuando dejamos de dar foco a una etiqueta
+    -ketdown (cuando aprieta una tecla)
+    -ketup (cuando suelta una tecla)
+
+-JQUERY no es del todo recomendable en ciertos casos porque 
+el consumo es mucho más grande.
+
+-Cuando el input es de tipo file, tengo que usar
+el objeto files
+
+inputArchivo.addEventListener('change', ()=>{
+         console.log(inputArchivo.files)
+})
+
+usar del formulario el evento submit
+
+---------------------------------------------------------------------------
+
+CLASE 04
+
+-Alert, promp y confirm
+es recomendable no usarlo. Sino crear un propio pop up
+
+-Uso forEach
+array.forEach((elemento, indice)=>{
+    console.log("En el índice " + indice + " está el elemento " + elemento)
+})
+
+-AJAX (Async JS and XML)
+    -AJAX es una forma de realizar pedidos pero de manera asincrónica.
+    -Hacer operaciones con el servidor para que no se "bloquee" y
+    continue navegando.
+    -Vamos a mandar o recibir archivos de tipo JSON entre otros.
+    -XHR = XMLHttpRequest (la api web que controla esto)
+
+Tres pasos fundamentales para usar AJAX
+1-Crear un objeto del tipo XHR
+2-Configurar el objeto XHR
+3-Enviar el pedido
+
+-Javascript es un sólo stack y no es multihilo.
+    -Pero cuando se ejecutan funcionens async, el stack las manda a otro stack de web apis, del navegador
+    y puedo seguir ejecutando otra cosa que ocupe el stack de js
+    -Las funciones async siempre vienen con un callback
+    -Cuando termina la función async termina, queda el callback y se mueve a otro stack que es el
+    "Task queue", cuando termina todo lo del stack ejecuta lo del "Task queue"
+    -el motor de JS es como un while infinito que pasa por los tres stacks
+    "Stack" principal, Stack de Web apis y el task queue.
+    A este bucle se lo conoce como "event loop"
+
+-setTimeout() - sirve para deicr que espere cierta cantidad de tiempo y ejecuta tal cosa
+setTimeout(()=>{
+    console.log("Estoy primero)
+}, 5000)
+
+---------------------------------------------------------------------------
+
+CLASE 05
+-Puedo remover eventos con
+removeEventListener('click', nombre)
+pero el remove el callback tiene que tener nombre
+
+-Verificar siempre en la pestaña de Event Listeners si se acumulan
+los eventos.
+
+-Todos los eventos vienen con target.
+    -Target se refiere a aquel elemento que te disparó
+    el evento.
+
+function Validar(e){
+    e.preventDefault()
+    e.stopPropagation()
+    //Es el mismo formulario
+    e.target
+    //Por lo cual puedo acceder a sus elementos
+    let input = e.target.elements.nombre.value
+
+}
+
+document.querySelector("form").addEventListener("submit", validar)
+
+REGEX: una expresión regular es un patrón de búsqueda
+dentro de un string
+    -Van entre barras //
+    Se separan en dos categorías:
+        -Caracteres literales: cualquier letra en minúscula, mayúscula y números en general
+        -Caracteres especiales:
+            -cantidad:
+                {X,Y} : x como mínimo e Y como máximo
+                ejemplo: /\d{2,4}/
+                {X}: especificmente x cantidad de Caracteres
+                + : una o más instancias del caracter
+                * : cero o más instancias del caracter
+
+            -grupo:
+                \w - (word) cualquier alfanumérico
+                \W - cualquiera NO alfanumérico
+                \d - cualquier dígito
+                \D - cualqueir NO dígito
+                \s - espacios, saltos de línea y tabulaciones
+                \S - cualquier NO espacio, salto de línea o tabulaciones
+                X|Y - busca X o Y es decir algún caracter o otro caracter
+                [a-z] - permite rangos, ejemplo entre la a y la z o del 1 al 100
+                . : cualquier caracter
+
+            -posición:
+            ^ : no hay nada antes del el inicio del string
+            $ : no hay nada despuès del fin del string
+
+AJAX:
+Tres pasos fundamentales para usar AJAX
+
+1-Crear un objeto del tipo XHR
+2-Configurar el objeto XHR
+3-Enviar el pedido
+
+-La propiedad readystate de XHR nos idce en que estado se
+encuentra el pedido. Son los siguientes.
+    -0 inicialización de XHR / aborto de un pedido(request)
+    -1 el objeto XHR está configurado
+    -2 los headers se enviaron y recibieron
+    -3 descargando informaciòn
+    -4 pedido finalizado
+    
+
+-readystatechange: se dispara cada vez que la propiedad
+readystate cambia.
+
+-Cuando se envía la respuesta, en el xhr
+va a estar en response, todo el contenido de lo que
+obtengo etc
+
+-load: se dispara cuando terminó el pedido
+-abort: se dispara cuando una solicitud se cancela
+
+-Mètodos HTTP:
+    GET: para pedir
+    POST: para enviar / crear
+    PUT: para reemplazar
+    PARCH: para editar
+    DELETE: para borrar
+
+-En la pestaña de Network, si pongoen "Disable cache" es como
+si pidiera todo nuevamente.
+De lo contrario me da 304 y sino hubo cambio me muestra el del cache.
+-También en "online" puedo simular una conexión más lenta.
+
+MIME TYPE:
+-Content type siempre guarda el tipo: MIME TYPE (no es la extensión del archivo):
+    -Son nombres específicos. como text/plain de ejemplo
+
+Principio de SPA: single page app
+    -donde simulo con ajax que el usuario se está moviendo
+    pero en realidad estoy trabajando sobre lo mismo de forma
+    dinámica como si estuviera navegando
+
+---------------------------------------------------------------------------
+
+CLASE 06
+
+-PRUEBAS CON AJAX:
+https://jsonplaceholder.typicode.com/
+
+-Las respuestas de AJAXS siempre vienen en formato string
+-typeof sirve para saber de qué tipo es el dato:
+    -typeof "" --> string
+    -typeof 1 --> number
+    -typeof NaN --> number
+    -typeof true --> Boolean
+    -typeof {} --> object
+    -typeof [] --> object
+    -typeof null --> object
+
+    -if(null) {} - da falso
+    -if({}) - da true
+    -array.isArray(x) - array tiene una función para
+    saber si es un array.
+
+-Para convertir un objeto a JSON
+puedo usar la función: JSON.parse()
+-Puedo usar un console.table() de mi objeto JSON para
+verlo por consola de forma más "elegante"
+
+-console.table() - me representa en la consola los datos en una tabulaciones
+-console.time(titulo) y al final del código console.timeEnd(mismoTitulo) - me da en milisengundos
+el tiempo que tardó en cargar ese contenido.
+
+-Cuando voy a iterar el Response con un forEach
+y quisiese mostrar la info en una tabla. tengo que hacer
+muchos appendchild al body, por lo que conviene
+crear un "Fragmento" en el que voy a crear todo ahí adentro
+y después ese fragmento cuando tiene toda la info al body.
+
+-El signo de interrogación es el inicio de "?" quiere
+decir que después de eso vienen parámetros por URL.
+
+Geolocation: es una api web de javascript
+    -window.navigator.geolocation.getCurrentPosition: trae una sola vez la posición actual
+    -navigator.geolocation.watchPosition: me trae la ubicación por cada cambio en el GPS
+    -En el navegador en el "More Tools" --> Sensors puedo simular otra latitud y longitud
+
+-Evento "progress" se ejecuta cada vez que se descarga una porción de tu recurso
+    -Para probar esto podemos:
+        -En network habilitar el 3G FAST
+        -Deshabilitar el caché
+
+-Cuando se hacen una descargas de valores chicos,
+es conveniente redondear los decimales en el progress bar
+pero si es muy grande, es conveniente mostrar el nombre más 2 decimales por ejemplo.
+
+-Math.round() - devuelve un número redondeado a convenincia
+-Math.floor() - devuelve un número pero redondeado para abajo
+-Math.ceil() - devuleve un número pero redondeado para arriba
+-valor.toFixed(x) - devuelve un string que le pone la cantidad de decimales que le ponga a valor
+
+-Las api para trabajar con imágenes:
+    -file
+    -blob
+-La api de URL: le pasas un blob o file y te genera una URL temporal en el DOM si la necesitas
+
+1-xhr.responseType="blob"
+
+2-en el load:
+ let blob = xhr.response
+    let url = URL.createObjectURL(blob)
+    console.log(url)
+
+    let imagen = document.createElement("img")
+    imagen.src=url
+    document.body.appendChild(imagen)
+
+3-si quisiera abrirlo en una pestaña nueva:
+ let a = document.createElement("a")
+    a.href=url
+    a.target="_blank"
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+
+4-si la quisiera descargar es: a.download="imagen";
+---------------------------------------------------------------------------
+
+CLASE 07
+
+-Object Keys le saca todas las propiedades a un
+objeto y te lo devuelve como un array.
+
+-ANOTACIÓN PARA TENER EN CUENTA:
+CUANDO ENTRO A UNA URL ES RECOMENDABLE QUITARLE
+CON JAVASCRIPT LA EXTENSIÓN EJEMPLO:
+SI ESTOY EN HOME: Y VOY A --> CONTACTOS.HTML QUE DIGA
+HOME/CONTACTOS en vez de HOME/CONTACTOS.HTML
+
+-No se le puede hacer un bucle for o foreach a un objeto
+    -Se usa un For... in
+    -otra forma es con el Object.keys(objeto) -> retorna un array
+
+Operador ternario:
+    
+    -Sentencia es una porción de código que NO necesariamente tiene
+    que tener un retorno.
+
+    -El foreach NO SE PUEDE GUARDAR EN UNA Variables
+    let resultado = array.forEach((elem)=>{
+
+    })NO SE PUEDE HACER ESTO
+
+    -Exrepsión: es una porción de código que siempre da retorno.
+    let array = [1, 2, 3]
+    
+    -array.map(() =>{...}) : me da un array de la misma longitud del saliente. Sirve al igual que un forEach pero además
+        si queremos aplicar alguna transformación en los valores del array.
+
+        -Puedo guardar el resultado en una variable
+        let resultado = array.map((elem)=>{
+            
+        })
+
+    -array.filter(() =>{...}) : filtrar un array de igual o menor longitud
+    -array.sort(() =>{...}) : ordena un array. Me retorna un array de la misma longitud.
+    -array.reduce(() =>{...}) : reduce el array una mínima expresión, a un valor solo. Dependiendo a qué lo queramos reducir.
+
+
+let resultado = if(){} else{}
+let resultado = (true) ? {} : {}
+    -let resultado = 1 > 2 ? "Mayor" : "Menor"
+    -Sí 1 es mayor a dos, retorná el valor de lo contrario
+    retorna menor.
+    -Se pueden anidar los operadores ternarios.
+
+
+AJAX - para subir imágenes
+
+-Los Labels se pueden relacioanr con un input si solo si
+el atributo for del label dice lo mismo que el id del input al que
+lo queremos conectar.
+
+-A tener en cuenta:
+    -Para realizar una función AJAX que le pase:
+    método, url, el callback, load, progress etc
+    -algunas se pueden obviar pero para hacerlo más
+    genérico.
+
+--EL FORMULARIO TIENE LA PROPIEDAD FORMDATA
+-FormData: sirve para agarrar automáticamente los datos de un formulario
+o podemos agregarle de forma individualmente después
+Eejmplo:
+    let form = document.queryselector("form)
+    let data = new FormData(form)
+
+-Se puede trabajar de muchas formas con las apis.
+Hay que investigar, leer la documentación, autenticarse etc
+pero es posible.
+    -la api de imgur para almacenar imágenes gratuitas
+
+CLASE 08
+
+function ajax(metodo, url, callback){
+    let xhr = new XMLHttpRequest
+    xhr.responseType="json"
+    xhr.open(metodo, url)
+    xhr.addEventListener("load", ()=>{
+        callback(xhr.response)
+    })
+    xhr.send()
+}
+
+Callback of hell: callback del infierno cuando por ejemplo
+con el ajax antiguo hay que anidar muchos ajax
+
+-Api de promesas (Promises): si tengo que hacer algo asincrónico que tenga un callback
+no entres a una pirámide, sino que se cierre el pedido ahí y la respuesta pueda pasar para abajo. que
+puedas hacer otro pedido abajo.
+Se pasa de una pirámide a una escalera. Se suele llamar "Escalera de promesas"
+
+-Las promesas tienen un status:
+    -Pending - Pendiente
+    -Resolved - Resuelta
+    -Rejected - Rechazada
+
+-Value: any es el valor final de la promesa
+
+-Lo que yo ponga dentro de una promesa se vuelve asincrónico
+
+
+let promise = new Promise((resolve, reject)=>{
+    //Esto no es un callback ya que corre inmediatamente y no después de algo
+    let suma  = 1 + 1
+    //Solo por el hecho de ejecutar la función cambia
+    //el status
+    resolve(suma)
+    //reject("Hubo un error")
+    
+})
+
+promise
+    .then((valor)=>{
+        //console.log(valor)
+        let segundaPromesa = new Promise((res, rej)=>{
+            let segunda_suma = valor + 3
+            res(segunda_suma)
+        })
+
+        //Saco la promesa y puedo continuar con un segundo then
+        return segundaPromesa
+    })
+    .then((valor)=>{
+        console.log(valor)
+    })
+    .catch((error)=>{
+        //console.log(error)
+    })
+
+
+    -Then se ejecuta solo sí finalizó bien
+    -Catch si hubo un error
+
+    Promise {} (libre)   promise.then().catch()
+    
+    .then({Promise}) (adentro) .then({return Promise})
+
+-Cuando quiero anidar promesas en la segunda tengo que retornarla y puedo
+utilizar un then, si quisiera hacer más promesas es de la misma forma
+agrego la promesa y la retorno.
+-Si es la misma cadena de promesas se utiliza un solo catch.
+
+Nuevo AJAX: es la api de FETCH = XHR + promise
+
+
+CLASE 09
+
+ -Cuando necesito hacer muchos fetchs me conviene juntarlos en un array
+ y después devolver un promise.all
+
+PROGRAMACIÓN ORIENTADA A OBJETOS
+
+__proto__ = protipo de un objeto
+-El protipo de un objeto es una cadena de propiedades adicionales a las cuales puede
+acceder un objeto de manera directa.
+Se mantiene por referencia al cual podemos acceder libremente.
+-Todos los objetos tienen asociado al menos 1 prototipo
+-Si hace un cosole a mi objeto y en las propiedades proto se pueden ver que están más claras
+que las otras. Si itero con un bucle a estas no voy a poder acceder.
+-Por ejemplo un array tiene dos prototipos
+-En la mayoría de los casos tienen varos prototipos
+- Es posible encontrar objetos sin prototipos.
+-El protipo de un objeto hace referencia a una propiedad
+llamada prototype la cual se encuentra en la función que creó al objeto.
+Como los objetos pasan por referencia, si modificamos el objeto original
+(prototype), vamos a estar indirectamente modificando el prototipo de cada objeto.
+ 
+-Lo que entiende javascript es:
+
+let a = {} => let a = new Objetc()
+let b = [] => let b = new Array()
+
+y así con los tipos básico, function, boolean, number y string
+
+-Las funciones son todo lo que nos construye el mundo de Javascript.
+-Function.Prototype == instancia.__proto__
+
+//Funciones: son objetos con la capacidad de ser ejecutados
+como objetos especiales de orden superior, variadicos que tienen
+ámbito(scope) y contexto.
+
+*Funcion de orden superior o primer orden: son aquellas que pueden recibir
+otra función como parámetro o que pueden pasarse ellas mismas como parámetros.
+*Función variadica: aquella función que no depende de la cantidad parámetros que le
+caiga ni de la cantidad de argumentos con la que vos la escribas para que se pueda
+ejecutar.
+*Ámbito(scope): la capadidad que tiene una función para llegar a una variable.
+Siempre son: (el global + local + closure)
+*Closure: es una especio de moemoria adicional que se crea en una función "x" si sólo sí
+x, fue definida adentro de otra función.
+
+-En la función, hay una variable que se puede usar siempre
+aunque no reciba argumento, se llama "arguments", para acceder a todos los argumentos
+entrantes de la función
+Es útil para que una función haga una cosa o la otra dependiendo sus argumentos

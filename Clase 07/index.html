@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        #dropzone{
+            border: 4px dashed grey;
+            /* view x hight al 100% de la altura de browser */
+            height: 100vh;
+            display: flex;
+        }
+        label{
+            display: flex;
+            width: 100%;
+            flex-grow: 1;
+            justify-content: center;
+            align-items: center;
+        }
+        input{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="dropzone">
+        <label for="archivo">
+            Soltá los archivos o hacé click acá
+        </label>
+        <input type="file" id="archivo">
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
