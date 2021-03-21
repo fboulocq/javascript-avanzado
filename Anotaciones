@@ -28,7 +28,8 @@ https://tympanus.net/codrops/2016/04/13/interactive-3d-mall-map/ - UN SHOPPING E
 https://animejs.com/
 https://www.buenosaires.gob.ar/desarrollourbano/transporte/apitransporte/api-doc - API DE GBA transporte
 https://api.imgur.com/ - para subir imágenes de forma gratuita y te da la url
-
+https://es.javascript.info/
+https://github.com/axios/axios --AXIOS
 
 
 DANIEL SANCHEZ - PARA MAQUETADO
@@ -712,3 +713,23 @@ x, fue definida adentro de otra función.
 aunque no reciba argumento, se llama "arguments", para acceder a todos los argumentos
 entrantes de la función
 Es útil para que una función haga una cosa o la otra dependiendo sus argumentos
+
+
+CLASE 10
+
+throw:
+    -En JS todo lo que le siga a throw, es tomado
+    como un error.
+
+throw new Error('Ocurrio un error)
+
+-Axios, es una mezcla de FETCH y XHR, la misma
+libería sabe cuál tiene que manejar.
+
+Si me suben un archivo y lo quiero leer:
+    -FileReader te lee el contenido de un archivo local, pero
+    el archivo tiene que estar volcado primero en la página.
+        -El evento load de un FileReader nos dice cuando ya se puede leer
+        el archivo.
+    -La función readerAsText, toma como parámetro un blog/file y lo empieza a leer
+
