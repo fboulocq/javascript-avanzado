@@ -17,9 +17,14 @@
     
 // })
 
+//Scope
 function externa()
 {
     let inetrna = function(){
 
     };
+
+    return inetrna;
 }
+
+1:06
