@@ -793,6 +793,21 @@ function hacerClick(a){
 // let copia_hacer_click = hacerClick.bind(null, 1);
 // document.addEventListener('click', copia_hacer_click);
 
+/*
+    new Function: crea un objeto nuevo, ejecuta la función que tiene al lado
+    y le pasa como contexto ese objeto que creó. Al terminar la ejecución nos retorna el
+    contexto. 
+*/
+
+//Función constructora
+function usuarios(nombre, edad)
+{
+    this.nombre = nombre;
+    this.edad = edad;
+}
+
+let federico = new usuarios("Federico", 27);
+let rober = new usuarios("Roberto", 55);
 
 
 PARAMETRIZAR en un objeto para una función:
@@ -811,4 +826,6 @@ function ajax(parametros)
 let parametros = {
     url: ""
 }
+
+CLASE 11:
 
