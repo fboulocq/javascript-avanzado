@@ -733,3 +733,82 @@ Si me suben un archivo y lo quiero leer:
         el archivo.
     -La función readerAsText, toma como parámetro un blog/file y lo empieza a leer
 
+Scope: global, local, closure
+    -Closure: 
+    ¿Qué es?: es un espacio en memoria.
+    ¿Cómo se genera?: cuando una función es creada dentro de otra función.
+    ¿Para qué sirve?: para guardar variables y que nadie las pueda tocar.
+
+    -Que necesito yo para existir a futuro.
+    En el ejemplo de abajo, la variable "a" quedó viva en el closure de
+    interna. Está encapsulada en interna. Puedo acceder al valor pero no lo puedo modificar.
+
+Contexto: (propio de JS)
+    -Por defecto es una variable {this} que apunta al objeto que contiene a la misma función.
+    Si la función no tiene contexto, siempre tiene el objeto global.
+    -Las únicas funciones que no cambian de contexto NUNCA son las funciones flecha.
+
+5 formas de ejecutar una función:
+
+function verContexto(a, b){
+    console.log(a,b);
+    console.log(this);
+}
+//Nartual
+//verContexto(1,2); //1, 2 y window
+
+//Fn.call() | fn.apply() | fn.bind() | new fn()
+
+/*
+    -fn.call() | el primer parámetro de call es lo que vos querés que valga el this. Siempre tiene que ser un objeto.
+    Y sino lo es, JS te lo transforma.
+    -Los próximos valores son los de la función
+
+*/
+//verContexto.call("call", 1, 2);
+
+/*
+    fn.aplly():
+    -el primer parámetro toma el valor del this.
+    -los parámetros de la función se pasan por array
+*/
+//verContexto.apply("apply", [1, 2]);
+
+/*
+    fn.bind():
+    -La única diferencia de tanto apply como call es que te retorna a vos una copia exacta
+    de la función de donde salís en la cual ya está linkeada con los parámetros a y b.
+    -Sirve para optimar las ejecuciones ya que te hace una copia. 
+*/
+//let copia = verContexto.bind("bind", 1, 2);
+
+function hacerClick(a){
+    console.log(a);
+}
+
+//document.addEventListener('click', hacerClick(1));
+// document.addEventListener('click', ()=>{
+//     hacerClick(1);
+// });
+// let copia_hacer_click = hacerClick.bind(null, 1);
+// document.addEventListener('click', copia_hacer_click);
+
+
+
+PARAMETRIZAR en un objeto para una función:
+function ajax(parametros)
+{
+    let parametros_default = {metodo: "get", url: "test.com"}
+    let parametros_finales = Object.assing({}, parametros_default, parametros)
+
+    -Object.assign -> se lee de derecha a izquierda y lo que hace es ir pisando. Es decir
+    parametros pisa a -> parametros_default, si falta algún dato lo pisa. Si no hay nada, no pisa nada Y
+    entonces va a utilizar default.
+
+    let xhr = new XMLHttpRequest
+    xhr.open(parametros.metodo etc etc)
+}
+let parametros = {
+    url: ""
+}
+
