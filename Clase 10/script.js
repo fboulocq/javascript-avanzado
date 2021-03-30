@@ -140,11 +140,31 @@ function hacerClick(a){
 */
 
 //Función constructora
-function usuarios(nombre, edad)
+function Usuarios(nombre, edad)
 {
+    //Propiedad prvvada
+    let n = nombre;
+
+    //Propiedades públicas
     this.nombre = nombre;
     this.edad = edad;
+    
+
+    this.getNombreThis = function(){
+        console.log(n);
+    }
+
+    // Usuarios.prototype.getNombre = function()
+    // {
+    //     //Cambia en todos si lo tomo acá.
+    //     console.log(n);
+    // }
+
+    Usuarios.prototype.saludo = function()
+    {
+        console.log("Hola!");
+    }
 }
 
-let federico = new usuarios("Federico", 27);
-let rober = new usuarios("Roberto", 55);
+let federico = new Usuarios("Federico", 27);
+let rober = new Usuarios("Roberto", 55);
