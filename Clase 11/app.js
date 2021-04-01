@@ -9,30 +9,39 @@
 
 
 */
-function Usuarios(nombre, edad)
-{
-    //Propiedad privada
-    let n = nombre;
+//Modelo clásico
+// function Usuarios(nombre, edad)
+// {
+//     //Propiedad privada
+//     let n = nombre;
 
-    //Propiedades públicas
-    this.nombre = nombre;
-    this.edad = edad;
-    this.getNombreThis = function()
-    {
-        console.log(n);
-    }
+//     //Propiedades públicas
+//     // this.nombre = nombre;
+//     this.edad = edad;
+    
+//     Object.defineProperty(this, 'nombre', {
+//         value : nombre,
+//         enumerable : true
+//     });
 
-    Usuarios.prototype.getNombre = function(){
-        console.log(this.n);
-    }
+//     this.getNombre = function()
+//     {
+//         console.log(n);
+//     }
 
-    Usuarios.prototype.saludo = function(){
-        console.log(`Hola ${this.nombre} ${this.edad}`)
-    }
-}
+//     Usuarios.prototype.getNombre = function(){
+//         console.log(this.n);
+//     }
 
-let federico = new Usuarios("Federico", 27);
-let rober = new Usuarios("Roberto", 55);
+//     Usuarios.prototype.saludo = function(){
+//         console.log(`Hola ${this.nombre} ${this.edad}`)
+//     }
+
+//     return Object.freeze(this);
+// }
+
+// let federico = new Usuarios("Federico", 27);
+// let rober = new Usuarios("Roberto", 55);
 
 //Para crear propiedas en objetos
 // let a = {x: 1}
@@ -66,9 +75,77 @@ let rober = new Usuarios("Roberto", 55);
 //     }
 // });
 
-let a = Object.create(null, {
-        x : {
-            value : 1
-        }
-    });
+// let a = Object.create(null, {
+//         x : {
+//             value : 1
+//         }
+//     });
 
+// a.z = true;
+
+// Object.defineProperty(a, 'y',{
+//     value : 2
+// })
+
+//Seguridad
+
+//No me permite seguir agregando cosas.
+//Object.preventExtensions(a);
+
+//Object.seal(a);
+
+/*
+    Previene que nuncas propiedades se puedas agregar y todas las propiedades
+    existente sean no configurables.
+    Además te permite cambios de otros atributos
+*/
+//Object.freeze(a);
+
+//Modelo ESC6
+
+/*
+    -Modelo clásico
+
+    function Usuario(nombre, edad)
+    {
+        this.nombre = nombre;
+        this.edad = edad;
+        Usuario.prototype.saludo = function() {}
+    }
+
+*/
+
+//Modelo ES6
+
+//Función autoinvocada
+//(function (){ código adentro })
+//IIFE = Inmediatly invoke function expression
+//Cuando termina se destruye
+//Generamente va sin nombre
+(function ()
+{
+    class Usuarios
+    {
+        constructor(nombre, edad)
+        {
+            this.nombre = nombre;
+            this.edad = edad;
+        }
+
+        //Usuario.prototype.saludo = function() {}
+        saludo()
+        {
+            console.log("hola");
+        }
+    }
+})
+
+
+/*
+    -Sirve para detectar errores invibles.
+    -Siempre va al principio del script
+*/
+
+//"use strict"
+
+//a = true;
