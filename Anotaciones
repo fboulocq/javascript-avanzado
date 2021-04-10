@@ -30,6 +30,7 @@ https://www.buenosaires.gob.ar/desarrollourbano/transporte/apitransporte/api-doc
 https://api.imgur.com/ - para subir imágenes de forma gratuita y te da la url
 https://es.javascript.info/
 https://github.com/axios/axios --AXIOS
+https://babeljs.io/
 
 
 DANIEL SANCHEZ - PARA MAQUETADO
@@ -902,3 +903,15 @@ autoinvocada que puede no exportar funciones al ámbito global
     }
 })
 
+CLASE 12:
+
+let a = {}
+a.__proto__ = es el prototipo del objeto a
+Object.Prototype = es el objeto que se va a usar como referencia para todas las cosas que se crean con new Object.
+    -Mi función constructora tiene su prototype
+
+    -Storage API: reemplazo de las cookies
+        -localStorage.setItem("Clave", "valor");
+        -localStorage.getItem("clave);
+     
+    En la ventana Applicación del navegador, está el apartado Storage.
