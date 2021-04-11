@@ -915,3 +915,8 @@ Object.Prototype = es el objeto que se va a usar como referencia para todas las 
         -localStorage.getItem("clave);
      
     En la ventana Applicación del navegador, está el apartado Storage.
+
+    
+    -Ubuntu en la store de microsoft
+    -Comander una buena línea de comando
+
